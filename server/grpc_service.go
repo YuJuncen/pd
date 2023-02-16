@@ -1917,7 +1917,7 @@ func (s *GrpcServer) LoadGlobalConfig(ctx context.Context, request *pdpb.LoadGlo
 	}
 	// Since item value needs to support marshal of different struct types,
 	// it should be set to `Payload bytes` instead of `Value string`.
-	if request.Names != nil {
+	if len(request.Names) > 0 {
 		res := make([]*pdpb.GlobalConfigItem, len(request.Names))
 		for i, name := range request.Names {
 			r, err := s.client.Get(ctx, path.Join(configPath, name))
